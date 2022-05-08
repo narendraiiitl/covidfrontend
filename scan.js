@@ -13,6 +13,7 @@ const sendData = async (id, name, file) => {
                 'Content-Type': 'application/json',
             },
         })
+        return res;
     } catch (error) {
         console.log(error);
     }
