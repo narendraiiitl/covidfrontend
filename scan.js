@@ -19,21 +19,45 @@ const sendData = async (id, name, file) => {
 };
 
 scnbtn.addEventListener("click", async () => {
-    console.log("clicked");
-
 
     const res = await sendData(id, name, file);
     console.log(res);
-    let positve = "Alert. There are high chances of Covid";
+    let positve = "Alert. There are high chances of Covid.";
     let negative = "Congratulations. there is a high probability of x-ray to be normal.";
     var content;
+
     if (res.result == "NORMAL") {
-        content = `name: ${document.getElementById("name").value} \n id: ${document.getElementById("id").value} \n Result: ${negative}`
+        content = '\r Patient ID: ' + document.getElementById("id").value + ' \r\n ' +
+            'Name: ' + document.getElementById("name").value + ' \r\n ' +
+
+            'Result: ' + negative;
     }
     else {
-        content = `name: ${document.getElementById("name").value} \n id: ${document.getElementById("id").value} \n Result:${positve}`
+        content = '\r Patient ID: ' + document.getElementById("id").value + ' \r\n ' +
+            'Name: ' + document.getElementById("name").value + ' \r\n ' +
+            'Result: ' + positve;
+
     }
-    window.open("data:application/txt," + encodeURIComponent(content), "_self");
+
+
+    const textToBLOB = new Blob([content], { type: 'text/plain' });
+    const sFileName = 'report.txt';
+    let newLink = document.createElement("a");
+    newLink.download = sFileName;
+    if (window.webkitURL != null) {
+        newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+    }
+    else {
+        newLink.href = window.URL.createObjectURL(textToBLOB);
+        newLink.style.display = "none";
+        document.body.appendChild(newLink);
+    }
+
+    newLink.click();
+
+
+    // window.open("data:application/txt," + encodeURIComponent(content), "_self");
+
     document.getElementById("id").value = "";
     document.getElementById("name").value = "";
     document.getElementById("file").value = "";
