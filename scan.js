@@ -2,7 +2,7 @@ var scnbtn = document.getElementById("scn-btn");
 var file = document.getElementById("file");
 var id = document.getElementById("id").value;
 var name = document.getElementById("name").value;
-const BASE_URL = 'http://localhost:3000/';
+const BASE_URL = 'https://warm-ocean-03768.herokuapp.com/';
 
 const sendData = async (id, name, file) => {
     const formData = new FormData();
