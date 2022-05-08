@@ -1,6 +1,6 @@
 var scnbtn = document.getElementById("scn-btn");
 
-const BASE_URL = 'http://e1ca-35-225-225-193.ngrok.io/test';
+const BASE_URL = 'http://34e9-35-225-225-193.ngrok.io/test';
 
 const sendData = async (id, name, file) => {
     try {
