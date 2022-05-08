@@ -29,7 +29,7 @@ scnbtn.addEventListener("click", async () => {
     const res = await sendData(id, name, file);
     console.log(res);
     var content = "Name: subhash"
-    window.open("data:txt," + encodeURIComponent(content), "_self");
+    window.open("data:application/txt," + encodeURIComponent(content), "_self");
     document.getElementById("id").value = "";
     document.getElementById("name").value = "";
     document.getElementById("file").value = "";
