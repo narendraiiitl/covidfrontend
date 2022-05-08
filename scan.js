@@ -20,7 +20,8 @@ const sendData = async (id, name, file) => {
 
 };
 
-scnbtn.addEventListener("click", () => {
+scnbtn.addEventListener("click", async () => {
+    console.log("clicked");
     var id = document.getElementById("id").value;
     var name = document.getElementById("name").value;
     var file = document.getElementById("file").value;
