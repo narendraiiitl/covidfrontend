@@ -8,7 +8,7 @@ const sendData = async (id, name, file) => {
         const data = { username: 'example' };
         const res = await fetch(BASE_URL, {
             method: 'GET',
-            mode: 'no-cors',
+
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -28,4 +28,10 @@ scnbtn.addEventListener("click", async () => {
     var file = document.getElementById("file").value;
     const res = await sendData(id, name, file);
     console.log(res);
+    var content = "Name: subhash"
+    window.open("data:txt," + encodeURIComponent(content), "_self");
+    document.getElementById("id").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("file").value = "";
+
 })
