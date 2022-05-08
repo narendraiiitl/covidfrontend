@@ -1,34 +1,38 @@
 var scnbtn = document.getElementById("scn-btn");
-
-const BASE_URL = 'http://c0e7-35-225-225-193.ngrok.io/test';
+var file = document.getElementById("file");
+var id = document.getElementById("id").value;
+var name = document.getElementById("name").value;
+const BASE_URL = 'http://localhost:3000/';
 
 const sendData = async (id, name, file) => {
-    try {
-        const formdata = { image: file, name: name, id: id };
-        const data = { username: 'example' };
-        const res = await fetch(BASE_URL, {
-            method: 'POST',
+    const formData = new FormData();
+    // console.log(file.files[0]);
+    formData.append("image", file.files[0]);
 
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-        })
-        return res;
-    } catch (error) {
-        console.log(error);
-    }
-
+    const res = await axios.post(BASE_URL, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+    return res.data;
 
 };
 
 scnbtn.addEventListener("click", async () => {
     console.log("clicked");
-    var id = document.getElementById("id").value;
-    var name = document.getElementById("name").value;
-    var file = document.getElementById("file").value;
+
+
     const res = await sendData(id, name, file);
     console.log(res);
-    var content = "Name: subhash"
+    let positve = "Alert. There are high chances of Covid";
+    let negative = "Congratulations. there is a high probability of x-ray to be normal.";
+    var content;
+    if (res.result == "NORMAL") {
+        content = `name: ${document.getElementById("name").value} \n id: ${document.getElementById("id").value} \n Result: ${negative}`
+    }
+    else {
+        content = `name: ${document.getElementById("name").value} \n id: ${document.getElementById("id").value} \n Result:${positve}`
+    }
     window.open("data:application/txt," + encodeURIComponent(content), "_self");
     document.getElementById("id").value = "";
     document.getElementById("name").value = "";
